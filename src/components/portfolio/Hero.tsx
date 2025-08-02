@@ -101,7 +101,7 @@ const Hero = () => {
             {/* Name & Title */}
             <div className="space-y-4">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold hero-gradient-text leading-tight">
-                Jomin J Joseph
+                Jomin <span className="text-primary/80">J</span> Joseph
               </h1>
               
               <div className="h-12 flex items-center justify-center">
