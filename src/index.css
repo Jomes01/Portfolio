@@ -2,39 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Portfolio Design System - Moderate Professional Theme */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Base colors - moderate tones */
+    --background: 220 10% 97%;
+    --foreground: 220 15% 15%;
+    --surface: 220 8% 98%;
+    
+    /* Brand colors - professional blue-purple */
+    --primary: 245 60% 60%;
+    --primary-dark: 245 65% 45%;
+    --primary-light: 245 50% 75%;
+    --primary-glow: 245 80% 85%;
+    
+    /* Neutral colors */
+    --card: 220 8% 100%;
+    --card-foreground: 220 15% 15%;
+    --surface-elevated: 220 8% 99%;
+    
+    /* Text colors */
+    --text-primary: 220 15% 15%;
+    --text-secondary: 220 12% 45%;
+    --text-muted: 220 8% 60%;
+    
+    /* Accent colors */
+    --accent: 245 45% 65%;
+    --accent-foreground: 0 0% 100%;
+    --secondary: 220 8% 94%;
+    --secondary-foreground: 220 15% 25%;
+    
+    /* Interactive states */
+    --border: 220 8% 88%;
+    --input: 220 8% 95%;
+    --ring: 245 60% 60%;
+    --muted: 220 8% 94%;
+    --muted-foreground: 220 12% 45%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-dark)));
+    --gradient-surface: linear-gradient(135deg, hsl(var(--surface)), hsl(var(--surface-elevated)));
+    --gradient-glow: radial-gradient(circle, hsl(var(--primary-glow) / 0.3), transparent);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px hsl(var(--primary) / 0.05);
+    --shadow-md: 0 4px 12px hsl(var(--primary) / 0.1);
+    --shadow-lg: 0 8px 25px hsl(var(--primary) / 0.15);
+    --shadow-glow: 0 0 30px hsl(var(--primary-glow) / 0.4);
+    
+    /* Animations */
+    --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     --radius: 0.5rem;
 
@@ -101,5 +120,78 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Portfolio-specific component styles */
+  .portfolio-section {
+    @apply py-20 px-4 md:px-8 lg:px-16 xl:px-24;
+  }
+  
+  .portfolio-container {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  .portfolio-card {
+    @apply bg-card rounded-2xl p-6 md:p-8 border border-border/50 
+           hover:shadow-lg transition-all duration-300
+           hover:-translate-y-1 hover:border-primary/20;
+  }
+  
+  .portfolio-title {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold 
+           bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent;
+  }
+  
+  .portfolio-subtitle {
+    @apply text-lg md:text-xl text-muted-foreground font-medium;
+  }
+  
+  .portfolio-button {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium
+           bg-primary text-accent-foreground hover:bg-primary-dark
+           transition-all duration-300 hover:shadow-md hover:-translate-y-0.5;
+  }
+  
+  .portfolio-button-outline {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium
+           border-2 border-primary text-primary hover:bg-primary hover:text-accent-foreground
+           transition-all duration-300 hover:shadow-md hover:-translate-y-0.5;
+  }
+  
+  .skill-tag {
+    @apply inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium
+           bg-secondary text-secondary-foreground border border-border/50
+           hover:bg-primary/10 hover:border-primary/30 transition-colors duration-200;
+  }
+  
+  .floating-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .fade-up {
+    animation: fadeUp 0.8s ease-out forwards;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
