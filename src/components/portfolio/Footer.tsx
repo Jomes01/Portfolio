@@ -141,9 +141,7 @@ const Footer = () => {
         <div className="py-6 border-t border-border/50">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2 text-text-muted text-sm">
-              <span>© {currentYear} Jomin J Joseph. Made with</span>
-              <Heart className="w-4 h-4 text-red-500 fill-current" />
-              <span>in Kerala, India</span>
+              <span>© {currentYear} Jomin J Joseph</span>
             </div>
 
             {/* Back to Top */}

@@ -1,15 +1,19 @@
 import { Calendar, MapPin, Building, Code, Shield, Database } from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 
 const Experience = () => {
+  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  const { elementRef: experiencesRef, isVisible: experiencesVisible } = useScrollAnimation();
+
   const experiences = [
     {
-      title: "Summer Internship",
-      company: "VECV",
+      title: "Data Analysis Intern",
+      company: "VE Commercial Vehicles Ltd.",
       location: "Pithampur, India",
       period: "Summer 2025",
-      type: "Upcoming",
-      description: "Upcoming summer internship focused on practical engineering applications and industry exposure.",
-      skills: ["Industrial Engineering", "Process Optimization", "Team Collaboration"],
+      type: "Completed",
+      description: "Completed summer internship focused on data analysis and practical engineering applications. Gained valuable hands-on experience in industrial processes, data interpretation, and team collaboration.",
+      skills: ["Data Analysis", "Industrial Engineering", "Process Optimization", "Team Collaboration"],
       icon: Building,
       color: "bg-blue-500/10 text-blue-600"
     },
@@ -40,7 +44,10 @@ const Experience = () => {
   return (
     <section id="experience" className="portfolio-section">
       <div className="portfolio-container">
-        <div className="text-center space-y-4 mb-16">
+        <div 
+          ref={titleRef}
+          className={`text-center space-y-4 mb-16 scroll-fade-in ${titleVisible ? 'animate' : ''}`}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-text-primary">
             Experience
           </h2>
@@ -50,9 +57,15 @@ const Experience = () => {
           </p>
         </div>
 
-        <div className="space-y-8">
+        <div 
+          ref={experiencesRef}
+          className={`space-y-8 scroll-scale-in ${experiencesVisible ? 'animate' : ''}`}
+        >
           {experiences.map((exp, index) => (
-            <div key={index} className="portfolio-card group hover:border-primary/30 transition-all duration-300">
+            <div 
+              key={index} 
+              className={`portfolio-card group hover:border-primary/30 transition-all duration-300 scroll-stagger ${experiencesVisible ? 'animate' : ''}`}
+            >
               <div className="flex flex-col lg:flex-row gap-6">
                 {/* Icon and Type */}
                 <div className="flex-shrink-0">
@@ -118,7 +131,7 @@ const Experience = () => {
           <p className="text-text-muted mb-6">
             Interested in collaborating or learning more about my experience?
           </p>
-          <a href="#contact" className="portfolio-button">
+          <a href="#contact" className="portfolio-button hover-glow">
             Let's Connect
           </a>
         </div>

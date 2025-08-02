@@ -1,19 +1,35 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Mail, Phone, Linkedin, Github, MapPin, Send, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { useScrollAnimation } from '@/hooks/use-scroll-animation';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+
+  // Scroll animations
+  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  const { elementRef: contactInfoRef, isVisible: contactInfoVisible } = useScrollAnimation();
+  const { elementRef: formRef, isVisible: formVisible } = useScrollAnimation();
+
+  // EmailJS configuration
+  const EMAILJS_PUBLIC_KEY = 'JJhM6A79KQ9HGl3Mi';
+  const EMAILJS_TEMPLATE_ID = 'template_3wy79wc';
+  const EMAILJS_SERVICE_ID = 'service_lb5sdlv';
+
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  }, []);
 
   const contactInfo = [
     {
@@ -58,16 +74,35 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate form submission (replace with actual form handling)
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      toast({
-        title: "Message sent successfully!",
-        description: "Thanks for reaching out. I'll get back to you soon.",
-      });
-      
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      // Send email using EmailJS with dynamic subject
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        from_message: formData.message,
+        to_name: "Jomin J Joseph",
+        subject: `A message by ${formData.name} has been received. Kindly respond at your earliest convenience.`
+      };
+
+      const result = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      if (result.status === 200) {
+        toast({
+          title: "Message sent successfully!",
+          description: "Thanks for reaching out. I'll get back to you soon.",
+        });
+        
+        // Reset form
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        throw new Error('Failed to send email');
+      }
     } catch (error) {
+      console.error('EmailJS Error:', error);
       toast({
         title: "Error sending message",
         description: "Please try again or contact me directly via email.",
@@ -81,7 +116,10 @@ const Contact = () => {
   return (
     <section id="contact" className="portfolio-section">
       <div className="portfolio-container">
-        <div className="text-center space-y-4 mb-16">
+        <div 
+          ref={titleRef}
+          className={`text-center space-y-4 mb-16 scroll-fade-in ${titleVisible ? 'animate' : ''}`}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-text-primary">
             Get In Touch
           </h2>
@@ -94,7 +132,10 @@ const Contact = () => {
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Information */}
-          <div className="space-y-8">
+          <div 
+            ref={contactInfoRef}
+            className={`space-y-8 scroll-slide-left ${contactInfoVisible ? 'animate' : ''}`}
+          >
             <div className="space-y-6">
               <h3 className="text-2xl font-semibold text-text-primary">
                 Let's Start a Conversation
@@ -113,7 +154,7 @@ const Contact = () => {
                   href={contact.href}
                   target={contact.href.startsWith('http') ? '_blank' : undefined}
                   rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="flex items-center gap-4 p-4 rounded-xl bg-surface-elevated border border-border/50 hover:border-primary/30 hover:bg-primary/5 transition-all duration-300 group"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-surface-elevated border border-border/50 hover:border-primary/30 hover:bg-primary/5 transition-all duration-300 group hover-lift"
                 >
                   <div className={`w-12 h-12 rounded-xl ${contact.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                     <contact.icon className="w-6 h-6" />
@@ -127,7 +168,7 @@ const Contact = () => {
             </div>
 
             {/* Location */}
-            <div className="portfolio-card bg-gradient-to-r from-primary/5 to-primary-dark/5">
+            <div className="portfolio-card bg-gradient-to-r from-primary/5 to-primary-dark/5 hover-lift">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                   <MapPin className="w-6 h-6 text-primary" />
@@ -140,7 +181,7 @@ const Contact = () => {
             </div>
 
             {/* Availability */}
-            <div className="portfolio-card border-green-200 bg-green-50/50">
+            <div className="portfolio-card border-green-200 bg-green-50/50 hover-lift">
               <div className="flex items-center gap-4">
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                 <div>
@@ -152,7 +193,10 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="portfolio-card">
+          <div 
+            ref={formRef}
+            className={`portfolio-card scroll-slide-right ${formVisible ? 'animate' : ''}`}
+          >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <h3 className="text-xl font-semibold text-text-primary flex items-center gap-2">
@@ -198,21 +242,6 @@ const Contact = () => {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm font-medium text-text-primary">
-                  Subject *
-                </label>
-                <Input
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  placeholder="What's this about?"
-                  required
-                  className="border-border/50 focus:border-primary/50"
-                />
-              </div>
-
-              <div className="space-y-2">
                 <label htmlFor="message" className="text-sm font-medium text-text-primary">
                   Message *
                 </label>
@@ -231,7 +260,7 @@ const Contact = () => {
               <Button 
                 type="submit" 
                 disabled={isSubmitting}
-                className="w-full portfolio-button justify-center"
+                className="w-full portfolio-button justify-center hover-glow"
               >
                 {isSubmitting ? (
                   <span className="flex items-center gap-2">
@@ -246,19 +275,6 @@ const Contact = () => {
                 )}
               </Button>
             </form>
-          </div>
-        </div>
-
-        {/* Response Time */}
-        <div className="text-center pt-12">
-          <div className="portfolio-card max-w-md mx-auto bg-gradient-to-r from-primary/5 to-primary-dark/5">
-            <div className="text-center space-y-2">
-              <h4 className="font-semibold text-text-primary">Quick Response</h4>
-              <p className="text-sm text-text-muted">
-                I typically respond to messages within 24 hours. For urgent matters, 
-                feel free to reach out directly via phone or email.
-              </p>
-            </div>
           </div>
         </div>
       </div>

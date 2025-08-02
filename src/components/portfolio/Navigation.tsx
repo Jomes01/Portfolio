@@ -10,7 +10,6 @@ const Navigation = () => {
     { label: 'About', href: '#about' },
     { label: 'Experience', href: '#experience' },
     { label: 'Skills', href: '#skills' },
-    { label: 'Services', href: '#services' },
     { label: 'Projects', href: '#projects' },
     { label: 'Contact', href: '#contact' }
   ];
@@ -55,7 +54,7 @@ const Navigation = () => {
             }}
             className="text-xl md:text-2xl font-bold text-text-primary hover:text-primary transition-colors duration-300"
           >
-            Jomin<span className="text-primary">J</span>
+            Jomin's...
           </a>
 
           {/* Desktop Navigation */}

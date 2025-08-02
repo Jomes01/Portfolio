@@ -1,6 +1,11 @@
 import { BookOpen, Target, Users, Lightbulb } from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 
 const About = () => {
+  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  const { elementRef: contentRef, isVisible: contentVisible } = useScrollAnimation();
+  const { elementRef: highlightsRef, isVisible: highlightsVisible } = useScrollAnimation();
+
   const highlights = [
     {
       icon: Target,
@@ -30,14 +35,20 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Text Content */}
           <div className="space-y-8">
-            <div className="space-y-4">
+            <div 
+              ref={titleRef}
+              className={`space-y-4 scroll-fade-in ${titleVisible ? 'animate' : ''}`}
+            >
               <h2 className="text-3xl md:text-4xl font-bold text-text-primary">
                 About Me
               </h2>
               <div className="w-20 h-1 bg-gradient-to-r from-primary to-primary-dark rounded-full"></div>
             </div>
 
-            <div className="space-y-6 text-text-secondary leading-relaxed">
+            <div 
+              ref={contentRef}
+              className={`space-y-6 text-text-secondary leading-relaxed scroll-slide-left ${contentVisible ? 'animate' : ''}`}
+            >
               <p className="text-lg">
                 An enthusiastic learner in the field of cybersecurity, I believe in the power of 
                 practical implementation. My work ranges from mobile app development to internship 
@@ -60,7 +71,7 @@ const About = () => {
             </div>
 
             {/* Education */}
-            <div className="portfolio-card">
+            <div className="portfolio-card hover-lift">
               <h3 className="text-xl font-semibold text-text-primary mb-3">Education</h3>
               <div className="space-y-2">
                 <p className="font-medium text-primary">B.Tech in Cyber Security</p>
@@ -71,11 +82,14 @@ const About = () => {
           </div>
 
           {/* Right Column - Highlights Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div 
+            ref={highlightsRef}
+            className={`grid grid-cols-1 md:grid-cols-2 gap-6 scroll-scale-in ${highlightsVisible ? 'animate' : ''}`}
+          >
             {highlights.map((highlight, index) => (
               <div 
                 key={index}
-                className="portfolio-card group hover:bg-primary/5 transition-all duration-300"
+                className={`portfolio-card group hover:bg-primary/5 transition-all duration-300 scroll-stagger ${highlightsVisible ? 'animate' : ''}`}
               >
                 <div className="space-y-4">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">

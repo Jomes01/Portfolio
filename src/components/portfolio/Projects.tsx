@@ -1,6 +1,12 @@
 import { ExternalLink, Github, Smartphone, Shield, Database, Zap } from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 
 const Projects = () => {
+  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  const { elementRef: projectRef, isVisible: projectVisible } = useScrollAnimation();
+  const { elementRef: statusRef, isVisible: statusVisible } = useScrollAnimation();
+  const { elementRef: comingSoonRef, isVisible: comingSoonVisible } = useScrollAnimation();
+
   // Generate a project mockup image
   const projectFeatures = [
     { icon: Smartphone, title: "React Native", description: "Cross-platform mobile development" },
@@ -12,7 +18,10 @@ const Projects = () => {
   return (
     <section id="projects" className="portfolio-section bg-surface">
       <div className="portfolio-container">
-        <div className="text-center space-y-4 mb-16">
+        <div 
+          ref={titleRef}
+          className={`text-center space-y-4 mb-16 scroll-fade-in ${titleVisible ? 'animate' : ''}`}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-text-primary">
             Featured Project
           </h2>
@@ -23,7 +32,10 @@ const Projects = () => {
         </div>
 
         {/* Featured Project - EduAccess */}
-        <div className="portfolio-card bg-gradient-to-br from-primary/5 to-primary-dark/5 border-primary/20">
+        <div 
+          ref={projectRef}
+          className={`portfolio-card bg-gradient-to-br from-primary/5 to-primary-dark/5 border-primary/20 scroll-scale-in ${projectVisible ? 'animate' : ''}`}
+        >
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Project Info */}
             <div className="space-y-8">
@@ -69,7 +81,6 @@ const Projects = () => {
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {[
                     "In-app Calling",
-                    "Web Scraping",
                     "PDF Summarization", 
                     "Offline Caching",
                     "Push Notifications",
@@ -86,7 +97,7 @@ const Projects = () => {
               <div className="space-y-4">
                 <h4 className="text-lg font-semibold text-text-primary">Tech Stack</h4>
                 <div className="flex flex-wrap gap-2">
-                  {["React Native", "Supabase", "TypeScript", "Gemini AI", "RESTful APIs"].map((tech, index) => (
+                  {["React Native", "Supabase", "TypeScript", "Gemini AI"].map((tech, index) => (
                     <span key={index} className="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium bg-primary/10 text-primary border border-primary/20">
                       {tech}
                     </span>
@@ -100,14 +111,14 @@ const Projects = () => {
                   href="https://github.com/Jomes01" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="portfolio-button-outline"
+                  className="portfolio-button-outline hover-glow"
                 >
                   <Github className="w-5 h-5" />
                   View Code
                 </a>
                 <a 
                   href="#contact" 
-                  className="portfolio-button"
+                  className="portfolio-button hover-glow"
                 >
                   <ExternalLink className="w-5 h-5" />
                   Learn More
@@ -169,8 +180,11 @@ const Projects = () => {
         </div>
 
         {/* Project Status */}
-        <div className="mt-12 text-center">
-          <div className="portfolio-card max-w-2xl mx-auto">
+        <div 
+          ref={statusRef}
+          className={`mt-12 text-center scroll-slide-left ${statusVisible ? 'animate' : ''}`}
+        >
+          <div className="portfolio-card max-w-2xl mx-auto hover-lift">
             <div className="space-y-4">
               <h4 className="text-lg font-semibold text-text-primary">Project Status</h4>
               <div className="flex items-center justify-center gap-2">
@@ -186,15 +200,18 @@ const Projects = () => {
         </div>
 
         {/* More Projects Coming Soon */}
-        <div className="mt-16 text-center">
-          <div className="portfolio-card bg-gradient-to-r from-muted/50 to-muted/30">
+        <div 
+          ref={comingSoonRef}
+          className={`mt-16 text-center scroll-slide-right ${comingSoonVisible ? 'animate' : ''}`}
+        >
+          <div className="portfolio-card bg-gradient-to-r from-muted/50 to-muted/30 hover-lift">
             <div className="space-y-4">
               <h4 className="text-xl font-semibold text-text-primary">More Projects Coming Soon</h4>
               <p className="text-text-secondary">
                 I'm constantly working on new projects and exploring innovative solutions. 
                 Stay tuned for more exciting developments in cybersecurity and mobile app development.
               </p>
-              <a href="#contact" className="portfolio-button-outline">
+              <a href="#contact" className="portfolio-button-outline hover-glow">
                 Get Notified
               </a>
             </div>

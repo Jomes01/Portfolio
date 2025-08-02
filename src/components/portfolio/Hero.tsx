@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { ChevronDown, Github, Linkedin, Mail, MapPin, Sparkles, ArrowRight, Download } from 'lucide-react';
-import profileImage from '@/assets/jomin-profile.jpg';
 
 const Hero = () => {
   const [currentTitle, setCurrentTitle] = useState(0);
@@ -65,46 +64,19 @@ const Hero = () => {
       </div>
 
       <div className="portfolio-container relative z-10">
-        <div className="text-center space-y-12 fade-up">
-          {/* Profile Section */}
-          <div className="relative inline-block group">
-            {/* Glowing Ring */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-primary-dark opacity-20 pulse-ring"></div>
-            
-            {/* Profile Container */}
-            <div className="relative">
-              <div className="w-56 h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 mx-auto rounded-full overflow-hidden glass-card group-hover:scale-105 transition-all duration-500">
-                <img 
-                  src={profileImage} 
-                  alt="Jomin J Joseph" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-              </div>
-              
-              {/* Status Indicator */}
-              <div className="absolute -bottom-4 -right-4 glass-card rounded-full p-3 magnetic-hover">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-xs font-medium text-text-primary hidden sm:block">Available</span>
-                </div>
-              </div>
-              
-              {/* Floating Badge */}
-              <div className="absolute -top-4 -left-4 glass-card rounded-xl p-2 floating-animation">
-                <Sparkles className="w-5 h-5 text-primary" />
-              </div>
-            </div>
-          </div>
-
-          {/* Main Content */}
-          <div className="space-y-8">
+        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-screen fade-up">
+          {/* Left Column - Text Content */}
+          <div className="space-y-8 text-left">
             {/* Name & Title */}
             <div className="space-y-4">
+              <p className="text-xl md:text-2xl lg:text-3xl text-text-secondary font-medium">
+                Hi there, Myself,
+              </p>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold hero-gradient-text leading-tight">
                 Jomin <span className="text-primary/80">J</span> Joseph
               </h1>
               
-              <div className="h-12 flex items-center justify-center">
+              <div className="h-12 flex items-start">
                 <span className="text-xl md:text-2xl lg:text-3xl font-medium text-shimmer">
                   {titles[currentTitle]}
                 </span>
@@ -112,7 +84,7 @@ const Hero = () => {
             </div>
 
             {/* Description */}
-            <div className="max-w-4xl mx-auto space-y-4">
+            <div className="space-y-4">
               <p className="text-lg md:text-xl lg:text-2xl text-text-secondary leading-relaxed font-light">
                 Crafting secure digital experiences through innovative 
                 <span className="text-primary font-medium"> cybersecurity solutions</span> and 
@@ -127,7 +99,7 @@ const Hero = () => {
             </div>
 
             {/* Enhanced CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-6">
+            <div className="flex flex-col sm:flex-row gap-6 pt-6">
               <a 
                 href="#contact" 
                 className="group relative overflow-hidden bg-gradient-to-r from-primary to-primary-dark text-accent-foreground px-8 py-4 rounded-2xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
@@ -152,7 +124,7 @@ const Hero = () => {
             </div>
 
             {/* Enhanced Social Links */}
-            <div className="flex justify-center gap-4 pt-8">
+            <div className="flex gap-4 pt-8">
               {[
                 { icon: Github, href: "https://github.com/Jomes01", label: "GitHub" },
                 { icon: Linkedin, href: "https://linkedin.com/in/jomin-j-joseph-57bbba27b", label: "LinkedIn" },
@@ -178,12 +150,44 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Enhanced Scroll Indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-            <span className="text-xs text-text-muted font-medium tracking-wider uppercase">Scroll to explore</span>
-            <div className="animate-bounce">
-              <ChevronDown className="w-6 h-6 text-primary" />
+          {/* Right Column - Profile Image */}
+          <div className="flex justify-center lg:justify-end">
+            <div className="relative inline-block group">
+              {/* Glowing Ring */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-primary-dark opacity-20 pulse-ring"></div>
+              
+              {/* Profile Container */}
+              <div className="relative">
+                <div className="w-72 h-72 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] rounded-full overflow-hidden glass-card group-hover:scale-105 transition-all duration-500">
+                  <img 
+                    src="https://i.postimg.cc/0yY70gcd/Whats-App-Image-2025-08-02-at-12-28-39-7c5f882f.jpg" 
+                    alt="Jomin J Joseph" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                </div>
+                
+                {/* Status Indicator */}
+                <div className="absolute -bottom-4 -right-4 glass-card rounded-full p-3 magnetic-hover">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs font-medium text-text-primary hidden sm:block">Available</span>
+                  </div>
+                </div>
+                
+                {/* Floating Badge */}
+                <div className="absolute -top-4 -left-4 glass-card rounded-xl p-2 floating-animation">
+                  <Sparkles className="w-5 h-5 text-primary" />
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+
+        {/* Enhanced Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+          <span className="text-xs text-text-muted font-medium tracking-wider uppercase">Scroll to explore</span>
+          <div className="animate-bounce">
+            <ChevronDown className="w-6 h-6 text-primary" />
           </div>
         </div>
       </div>
