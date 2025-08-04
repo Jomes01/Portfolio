@@ -1,11 +1,6 @@
 import { ExternalLink, Github, Smartphone, Shield, Database, Zap } from 'lucide-react';
-import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 
 const Projects = () => {
-  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
-  const { elementRef: projectRef, isVisible: projectVisible } = useScrollAnimation();
-  const { elementRef: statusRef, isVisible: statusVisible } = useScrollAnimation();
-  const { elementRef: comingSoonRef, isVisible: comingSoonVisible } = useScrollAnimation();
 
   // Generate a project mockup image
   const projectFeatures = [
@@ -19,8 +14,7 @@ const Projects = () => {
     <section id="projects" className="portfolio-section bg-surface">
       <div className="portfolio-container">
         <div 
-          ref={titleRef}
-          className={`text-center space-y-4 mb-16 scroll-fade-in ${titleVisible ? 'animate' : ''}`}
+          className="text-center space-y-4 mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-text-primary">
             Featured Project
@@ -33,8 +27,7 @@ const Projects = () => {
 
         {/* Featured Project - EduAccess */}
         <div 
-          ref={projectRef}
-          className={`portfolio-card bg-gradient-to-br from-primary/5 to-primary-dark/5 border-primary/20 scroll-scale-in ${projectVisible ? 'animate' : ''}`}
+          className="portfolio-card bg-gradient-to-br from-primary/5 to-primary-dark/5 border-primary/20"
         >
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Project Info */}
@@ -181,8 +174,7 @@ const Projects = () => {
 
         {/* Project Status */}
         <div 
-          ref={statusRef}
-          className={`mt-12 text-center scroll-slide-left ${statusVisible ? 'animate' : ''}`}
+          className="mt-12 text-center"
         >
           <div className="portfolio-card max-w-2xl mx-auto hover-lift">
             <div className="space-y-4">
@@ -201,8 +193,7 @@ const Projects = () => {
 
         {/* More Projects Coming Soon */}
         <div 
-          ref={comingSoonRef}
-          className={`mt-16 text-center scroll-slide-right ${comingSoonVisible ? 'animate' : ''}`}
+          className="mt-16 text-center"
         >
           <div className="portfolio-card bg-gradient-to-r from-muted/50 to-muted/30 hover-lift">
             <div className="space-y-4">

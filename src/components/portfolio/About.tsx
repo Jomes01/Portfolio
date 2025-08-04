@@ -1,10 +1,6 @@
 import { BookOpen, Target, Users, Lightbulb } from 'lucide-react';
-import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 
 const About = () => {
-  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
-  const { elementRef: contentRef, isVisible: contentVisible } = useScrollAnimation();
-  const { elementRef: highlightsRef, isVisible: highlightsVisible } = useScrollAnimation();
 
   const highlights = [
     {
@@ -36,8 +32,7 @@ const About = () => {
           {/* Left Column - Text Content */}
           <div className="space-y-8">
             <div 
-              ref={titleRef}
-              className={`space-y-4 scroll-fade-in ${titleVisible ? 'animate' : ''}`}
+              className="space-y-4"
             >
               <h2 className="text-3xl md:text-4xl font-bold text-text-primary">
                 About Me
@@ -46,8 +41,7 @@ const About = () => {
             </div>
 
             <div 
-              ref={contentRef}
-              className={`space-y-6 text-text-secondary leading-relaxed scroll-slide-left ${contentVisible ? 'animate' : ''}`}
+              className="space-y-6 text-text-secondary leading-relaxed"
             >
               <p className="text-lg">
                 An enthusiastic learner in the field of cybersecurity, I believe in the power of 
@@ -83,13 +77,12 @@ const About = () => {
 
           {/* Right Column - Highlights Grid */}
           <div 
-            ref={highlightsRef}
-            className={`grid grid-cols-1 md:grid-cols-2 gap-6 scroll-scale-in ${highlightsVisible ? 'animate' : ''}`}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
             {highlights.map((highlight, index) => (
               <div 
                 key={index}
-                className={`portfolio-card group hover:bg-primary/5 transition-all duration-300 scroll-stagger ${highlightsVisible ? 'animate' : ''}`}
+                className="portfolio-card group hover:bg-primary/5 transition-all duration-300"
               >
                 <div className="space-y-4">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">

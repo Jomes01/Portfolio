@@ -1,9 +1,6 @@
 import { Calendar, MapPin, Building, Code, Shield, Database } from 'lucide-react';
-import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 
 const Experience = () => {
-  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
-  const { elementRef: experiencesRef, isVisible: experiencesVisible } = useScrollAnimation();
 
   const experiences = [
     {
@@ -45,8 +42,7 @@ const Experience = () => {
     <section id="experience" className="portfolio-section">
       <div className="portfolio-container">
         <div 
-          ref={titleRef}
-          className={`text-center space-y-4 mb-16 scroll-fade-in ${titleVisible ? 'animate' : ''}`}
+          className="text-center space-y-4 mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-text-primary">
             Experience
@@ -58,13 +54,12 @@ const Experience = () => {
         </div>
 
         <div 
-          ref={experiencesRef}
-          className={`space-y-8 scroll-scale-in ${experiencesVisible ? 'animate' : ''}`}
+          className="space-y-8"
         >
           {experiences.map((exp, index) => (
             <div 
               key={index} 
-              className={`portfolio-card group hover:border-primary/30 transition-all duration-300 scroll-stagger ${experiencesVisible ? 'animate' : ''}`}
+              className="portfolio-card group hover:border-primary/30 transition-all duration-300"
             >
               <div className="flex flex-col lg:flex-row gap-6">
                 {/* Icon and Type */}

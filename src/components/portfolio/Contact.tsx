@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
@@ -16,10 +15,7 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  // Scroll animations
-  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
-  const { elementRef: contactInfoRef, isVisible: contactInfoVisible } = useScrollAnimation();
-  const { elementRef: formRef, isVisible: formVisible } = useScrollAnimation();
+  // Scroll animations removed
 
   // EmailJS configuration
   const EMAILJS_PUBLIC_KEY = 'JJhM6A79KQ9HGl3Mi';
@@ -117,8 +113,7 @@ const Contact = () => {
     <section id="contact" className="portfolio-section">
       <div className="portfolio-container">
         <div 
-          ref={titleRef}
-          className={`text-center space-y-4 mb-16 scroll-fade-in ${titleVisible ? 'animate' : ''}`}
+          className="text-center space-y-4 mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-text-primary">
             Get In Touch
@@ -133,8 +128,7 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Information */}
           <div 
-            ref={contactInfoRef}
-            className={`space-y-8 scroll-slide-left ${contactInfoVisible ? 'animate' : ''}`}
+            className="space-y-8"
           >
             <div className="space-y-6">
               <h3 className="text-2xl font-semibold text-text-primary">
@@ -194,8 +188,7 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div 
-            ref={formRef}
-            className={`portfolio-card scroll-slide-right ${formVisible ? 'animate' : ''}`}
+            className="portfolio-card"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">

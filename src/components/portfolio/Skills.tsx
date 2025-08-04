@@ -1,11 +1,6 @@
 import { Smartphone, BarChart3, Shield, Database, Brain, Code2 } from 'lucide-react';
-import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 
 const Skills = () => {
-  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
-  const { elementRef: categoriesRef, isVisible: categoriesVisible } = useScrollAnimation();
-  const { elementRef: toolsRef, isVisible: toolsVisible } = useScrollAnimation();
-  const { elementRef: philosophyRef, isVisible: philosophyVisible } = useScrollAnimation();
 
   const skillCategories = [
     {
@@ -64,8 +59,7 @@ const Skills = () => {
     <section id="skills" className="portfolio-section bg-surface">
       <div className="portfolio-container">
         <div 
-          ref={titleRef}
-          className={`text-center space-y-4 mb-16 scroll-fade-in ${titleVisible ? 'animate' : ''}`}
+          className="text-center space-y-4 mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-text-primary">
             Skills & Expertise
@@ -78,13 +72,12 @@ const Skills = () => {
 
         {/* Skill Categories */}
         <div 
-          ref={categoriesRef}
-          className={`grid md:grid-cols-2 gap-8 mb-16 scroll-scale-in ${categoriesVisible ? 'animate' : ''}`}
+          className="grid md:grid-cols-2 gap-8 mb-16"
         >
           {skillCategories.map((category, index) => (
             <div 
               key={index} 
-              className={`portfolio-card space-y-6 scroll-stagger ${categoriesVisible ? 'animate' : ''}`}
+              className="portfolio-card space-y-6"
             >
               <div className="flex items-center gap-3">
                 <div className={`w-12 h-12 rounded-xl ${category.color} flex items-center justify-center`}>
@@ -108,8 +101,7 @@ const Skills = () => {
 
         {/* Tools & Technologies */}
         <div 
-          ref={toolsRef}
-          className={`portfolio-card scroll-slide-right ${toolsVisible ? 'animate' : ''}`}
+          className="portfolio-card"
         >
           <div className="text-center space-y-6">
             <h3 className="text-2xl font-semibold text-text-primary">
@@ -127,8 +119,7 @@ const Skills = () => {
 
         {/* Learning Philosophy */}
         <div 
-          ref={philosophyRef}
-          className={`text-center pt-12 scroll-fade-in ${philosophyVisible ? 'animate' : ''}`}
+          className="text-center pt-12"
         >
           <div className="max-w-3xl mx-auto space-y-4">
             <h3 className="text-xl font-semibold text-text-primary">

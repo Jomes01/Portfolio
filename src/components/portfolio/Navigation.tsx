@@ -54,7 +54,7 @@ const Navigation = () => {
             }}
             className="text-xl md:text-2xl font-bold text-text-primary hover:text-primary transition-colors duration-300"
           >
-            Jomin's...
+            Jomin's <span className="text-primary/80">Portfolio</span>
           </a>
 
           {/* Desktop Navigation */}
